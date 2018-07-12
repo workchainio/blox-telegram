@@ -1,0 +1,16 @@
+{
+  "name": "blox-telegram",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "mocha": "^5.2.0",
+    "redis": "^2.8.0",
+    "telegraf": "^3.21.2",
+    "winston": "^3.0.0"
+  }
+}
