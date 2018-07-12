@@ -15,10 +15,10 @@ class Topic{
 		return this.responses[Math.floor(Math.random() * this.responses.length)];
 	}
 	async send(ctx, target){
-		return this.getResponse().send();
+		return this.getResponse().send(ctx, target);
 	}
 	async reply(ctx, target){
-		return this.getResponse().reply();
+		return this.getResponse().reply(ctx, target);
 	}
 
 	static find(name){
