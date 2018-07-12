@@ -1,9 +1,7 @@
 # custom
 build/*
 truffle.js
-
-
-
+config.js
 
 # Created by .ignore support plugin (hsz.mobi)
 ### VisualStudioCode template
