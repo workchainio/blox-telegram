@@ -7,7 +7,9 @@ class Bouncer{
 	static warn(ctx, target){
 
 		const member = target? ctx.target.member : ctx.member;
-		
+		if(member.admin){
+			return;
+		}
 		
 		if(member.warned){
 			return this.ban(ctx, target);
@@ -22,6 +24,9 @@ class Bouncer{
 	static ban(ctx, target){
 
 		const member = target? ctx.target.member : ctx.member;
+		if(member.admin){
+			return;
+		}
 
 		member.banned = true;
 		member.save();
