@@ -38,7 +38,16 @@ class Member {
 
     static async create(data, admins) {
         let member = new Member(data);
-        member.full_name = `${member.first_name} ${member.last_name}`;
+
+        if(member.first_name && member.last_name){
+            member.full_name = `${member.first_name} ${member.last_name}`;
+        }else if(member.first_name){
+            member.full_name = member.first_name;
+        }else{
+            member.full_name = member.username;
+        }
+
+        member.full_name = `${member.first_name} ${member.last_name? member.last_name : ''}`;
         member.joined = Date.now();
         member.new = true;
         member.admin = admins.reduce((value, admin) => {return value || (admin.user.id === member.id)}, false);
