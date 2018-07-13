@@ -58,6 +58,5 @@ class Member {
     }
         
 }
-Member.clear();
 
 exports.Member = Member;
