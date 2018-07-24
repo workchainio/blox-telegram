@@ -1,12 +1,20 @@
 const { Topic } = require('./controllers/topic');
 const { Bouncer } = require('./controllers/bouncer');
 const { Filter } = require('./controllers/filters');
+const { Response } = require('./controllers/response');
 const { AdminOnly, IgnoreAdmin } = require('./middlewares');
 
 const bot = require('./libs/bot');
 const log = require('./libs/log');
 
+bot.command('reply', AdminOnly, async ctx => {
 
+	const message = ctx.message.text.split('/reply ')[1];
+	const reponse = new Response(message);
+
+	reponse.reply(ctx, true);
+
+});
 bot.command('respond', AdminOnly, async ctx => {
 
 	const [cmd, topicName] = ctx.message.text.split(' ');
@@ -38,6 +46,7 @@ bot.command('ban', AdminOnly, async ctx => {
 
 	Bouncer.ban(ctx, true);
 });
+
 
 bot.on('text', IgnoreAdmin, async ctx => {
 
