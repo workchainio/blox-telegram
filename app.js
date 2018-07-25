@@ -15,7 +15,7 @@ bot.command('reply', AdminOnly, async ctx => {
 	reponse.reply(ctx, true);
 
 });
-bot.command('reply-topic', AdminOnly, async ctx => {
+bot.command('reply_topic', AdminOnly, async ctx => {
 
 	const [cmd, topicName] = ctx.message.text.split(' ');
 	const topic = Topic.find(topicName);
