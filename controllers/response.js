@@ -1,9 +1,16 @@
+const { Stickers } = require('../config');
+
 class Response{
 
 	constructor(template){
 		if(template.includes('Sticker:')){
-			this.sticker = template.substr(template.indexOf('Sticker:')+8);
 			this.template = template.substr(0, template.indexOf('Sticker:'));
+
+			this.sticker = template.substr(template.indexOf('Sticker:')+8);
+			if(Stickers && Stickers[this.sticker]){
+				this.sticker = Stickers[this.sticker];	
+			}
+	
 		}else{
 			this.template = template;
 		}
