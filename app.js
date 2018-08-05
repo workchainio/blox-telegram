@@ -48,15 +48,15 @@ bot.command('ban', AdminOnly, async ctx => {
 });
 
 let new_members_count = 0;
+const AutoWelcomeTopic = Topic.find('auto_welcome');
 bot.on('new_chat_members', async ctx => {
+	ctx.deleteMessage();
 
 	new_members_count++;
 	if(new_members_count == 10){
 		new_members_count = 0;
-		console.log('send welcome message');
-	}
-
-	ctx.message.deleteMessage();	
+		AutoWelcomeTopic.send(ctx);
+	}	
 });
 
 
