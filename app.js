@@ -47,6 +47,18 @@ bot.command('ban', AdminOnly, async ctx => {
 	Bouncer.ban(ctx, true);
 });
 
+let new_members_count = 0;
+bot.on('new_chat_members', async ctx => {
+
+	new_members_count++;
+	if(new_members_count == 10){
+		new_members_count = 0;
+		console.log('send welcome message');
+	}
+
+	ctx.message.deleteMessage();	
+});
+
 
 bot.on('text', IgnoreAdmin, async ctx => {
 
