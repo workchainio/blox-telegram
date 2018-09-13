@@ -88,7 +88,7 @@ class Filter{
 				let url;
 
 				WhitelistRegEx.forEach(whitelist => {
-					if(whitelist.test(url)){
+					if(whitelist.test(text)){
 						url = 'workchain.io';
 					}
 				});
