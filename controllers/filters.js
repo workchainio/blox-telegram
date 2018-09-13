@@ -2,11 +2,13 @@ const { URL } = require('url');
 const { Topic } = require('./topic');
 const { Bouncer } = require('./bouncer');
 const { Keyword } = require('./keyword');
-const { Filters } = require('../config');
+const { Filters, Whitelist } = require('../config');
 
 const Cache = [];
 const BanTopic = Topic.find('ban');
 const WarnTopic = Topic.find('warn');
+
+Whitelist = Whitelist.map(data => new RegExp(data));
 
 class Filter{
 
@@ -84,6 +86,13 @@ class Filter{
 			entity => {
 				let text = message.text.substr(entity.offset, entity.length).toLowerCase();
 				let url;
+
+				Whitelist.forEach(whitelist => {
+					if(whitelist.test(url)){
+						url = 'workchain.io';
+					}
+				});
+
 				try{
 					url = new URL(text.toLowerCase());
 				}catch(error){
