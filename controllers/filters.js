@@ -8,7 +8,7 @@ const Cache = [];
 const BanTopic = Topic.find('ban');
 const WarnTopic = Topic.find('warn');
 
-Whitelist = Whitelist.map(data => new RegExp(data));
+const WhitelistRegEx = Whitelist.map(data => new RegExp(data));
 
 class Filter{
 
@@ -87,7 +87,7 @@ class Filter{
 				let text = message.text.substr(entity.offset, entity.length).toLowerCase();
 				let url;
 
-				Whitelist.forEach(whitelist => {
+				WhitelistRegEx.forEach(whitelist => {
 					if(whitelist.test(url)){
 						url = 'workchain.io';
 					}
