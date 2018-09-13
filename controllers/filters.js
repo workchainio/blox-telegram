@@ -8,7 +8,7 @@ const Cache = [];
 const BanTopic = Topic.find('ban');
 const WarnTopic = Topic.find('warn');
 
-const WhitelistRegEx = Whitelist.map(data => new RegExp(data));
+const WhitelistRegEx = Whitelist.map(data => new RegExp(data.toLowerCase()));
 
 class Filter{
 
