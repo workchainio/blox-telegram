@@ -89,7 +89,7 @@ class Filter{
 
 				WhitelistRegEx.forEach(whitelist => {
 					if(whitelist.test(text)){
-						url = 'workchain.io';
+						text = 'workchain.io';
 					}
 				});
 
