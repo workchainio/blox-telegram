@@ -80,11 +80,14 @@ class Filter{
 
 		const entities = message.entities
 		.filter(
-			entity => entity.type === 'url'
+			entity => entity.type === 'url' || entity.type === 'text_link'
 		)
 		.map( 
 			entity => {
 				let text = message.text.substr(entity.offset, entity.length).toLowerCase();
+				if(entity.type === 'text_link'){
+					text = entity.url;
+				}
 				let url;
 
 				WhitelistRegEx.forEach(whitelist => {
