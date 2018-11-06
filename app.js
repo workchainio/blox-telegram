@@ -47,14 +47,16 @@ bot.command('ban', AdminOnly, async ctx => {
 	Bouncer.ban(ctx, true);
 });
 
+let new_messages_count = 0;
 let new_members_count = 0;
 const AutoWelcomeTopic = Topic.find('auto_welcome');
 bot.on('new_chat_members', async ctx => {
 	ctx.deleteMessage();
 
 	new_members_count++;
-	if(new_members_count == 10){
+	if(new_members_count >= 25 && new_messages_count >= 7){
 		new_members_count = 0;
+		new_messages_count = 0;
 		AutoWelcomeTopic.send(ctx);
 	}	
 });
@@ -62,6 +64,7 @@ bot.on('new_chat_members', async ctx => {
 
 bot.on('text', IgnoreAdmin, async ctx => {
 
+	new_messages_count++;
 	const filter = Filter.find(ctx.message);
 	if(filter){
 		filter.execute(ctx);
