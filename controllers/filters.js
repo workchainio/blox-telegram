@@ -47,8 +47,6 @@ class Filter{
 
 	async execute(ctx){
 
-		const response = this.topic.getResponse();
-
 		if(this.delay){
 			await new Promise((resolve) => {
 				setTimeout(resolve, this.delay * 1000);
@@ -57,8 +55,13 @@ class Filter{
 
 		if(this.del){
 			ctx.deleteMessage();
-			await response.send(ctx);
-		}else{
+
+			if(this.topic){
+				const response = this.topic.getResponse();
+				await response.send(ctx);
+			}
+		}else if(this.topic) {
+			const response = this.topic.getResponse();
 			await response.reply(ctx);
 		}
 
