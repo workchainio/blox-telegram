@@ -18,7 +18,8 @@ class Bouncer{
 		member.warned = true;
 		member.save();
 
-		WarnTopic.send(ctx, target);
+		if(WarnTopic)
+			WarnTopic.send(ctx, target);
 	}
 
 	static ban(ctx, target){
@@ -35,7 +36,8 @@ class Bouncer{
 			ctx.kickChatMember(member.id);
 		}, 10000);
 
-		BanTopic.send(ctx, target);
+		if(BanTopic)
+			BanTopic.send(ctx, target);
 	}
 }
 
