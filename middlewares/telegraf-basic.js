@@ -24,3 +24,25 @@ exports.IgnoreAdmin = async (ctx, next) => {
 
     next();
 }
+
+exports.DeleteForwarded = async (ctx, next) => {
+
+    if(member.admin){
+        next();
+    }
+
+    if (ctx.message && ctx.message.forward_from) {
+        ctx.deleteMessage();
+
+        if(member.warned){
+            ctx.kickChatMember(member.id);
+            member.banned = true;
+            member.save();
+        }else{
+            member.warned = true;
+            member.save();
+        }
+    }
+
+    
+}

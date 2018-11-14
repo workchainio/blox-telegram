@@ -2,7 +2,7 @@ const { Topic } = require('./controllers/topic');
 const { Bouncer } = require('./controllers/bouncer');
 const { Filter } = require('./controllers/filters');
 const { Response } = require('./controllers/response');
-const { AdminOnly, IgnoreAdmin } = require('./middlewares');
+const { AdminOnly, IgnoreAdmin, DeleteForwarded } = require('./middlewares');
 
 const bot = require('./libs/bot');
 const log = require('./libs/log');
@@ -62,7 +62,7 @@ bot.on('new_chat_members', async ctx => {
 });
 
 
-bot.on('text', IgnoreAdmin, async ctx => {
+bot.on('text', IgnoreAdmin, DeleteForwarded, async ctx => {
 
 	new_messages_count++;
 	const filter = Filter.find(ctx.message);
